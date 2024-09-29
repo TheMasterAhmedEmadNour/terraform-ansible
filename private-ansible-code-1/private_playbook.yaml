@@ -1,0 +1,30 @@
+---
+  - host: privateEC2-1
+    remote-user: ubuntu
+    become: yes
+    tasks:
+
+
+      - name: Update apt packages
+        apt:
+          update_cache: yes
+          
+      - name: Install Docker
+        apt:
+          name: docker.io
+          state: present
+          update_cache: yes
+
+      - name: Ensure Docker service is running
+        service:
+          name: docker
+          state: started
+          enabled: yes
+
+      - name: Run NGINX container
+        docker_container:
+          name: nginx
+          image: nginx
+          state: started
+          ports:
+            - "80:80"
