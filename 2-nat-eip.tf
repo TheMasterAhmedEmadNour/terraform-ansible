@@ -1,8 +1,8 @@
 resource "aws_eip" "natip" {
-  
+
 }
 resource "aws_eip" "natip2" {
-  
+
 }
 resource "aws_nat_gateway" "NAT" {
   allocation_id = aws_eip.natip.id

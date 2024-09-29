@@ -19,8 +19,8 @@ resource "aws_security_group" "instance_sg" {
 
 # Launch Configuration for ASG
 resource "aws_launch_configuration" "asg_config" {
-  image_id = "ami-0c55b159cbfafe1f0" # Example Ubuntu AMI
-  instance_type = "t2.micro"
+  image_id        = "ami-0c55b159cbfafe1f0" # Example Ubuntu AMI
+  instance_type   = "t2.micro"
   security_groups = [aws_security_group.instance_sg.id]
 
   lifecycle {
@@ -30,9 +30,9 @@ resource "aws_launch_configuration" "asg_config" {
 
 # Auto Scaling Group
 resource "aws_autoscaling_group" "asg" {
-  vpc_zone_identifier = [aws_subnet.privatesub1.id, aws_subnet.privatesub2.id]
+  vpc_zone_identifier  = [aws_subnet.privatesub1.id, aws_subnet.privatesub2.id]
   launch_configuration = aws_launch_configuration.asg_config.id
-  min_size = 2
-  max_size = 3
-  desired_capacity = 2
+  min_size             = 2
+  max_size             = 3
+  desired_capacity     = 2
 }
